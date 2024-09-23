@@ -10,4 +10,9 @@ public class Main : MonoBehaviour
         SceneManager.LoadScene("ChooseMode");
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
