@@ -216,6 +216,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+<<<<<<< HEAD
 --- !u!1 &164745100
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +257,8 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+=======
+>>>>>>> Map
 --- !u!1 &217548670
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +270,10 @@ GameObject:
   - component: {fileID: 217548673}
   - component: {fileID: 217548672}
   - component: {fileID: 217548671}
+<<<<<<< HEAD
   - component: {fileID: 217548674}
+=======
+>>>>>>> Map
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -349,6 +355,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!114 &217548674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7a905b88fbf794a9c782225c3a3913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> Map
 --- !u!1 &489065816
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +445,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489065816}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &547529034
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +724,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574213608}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Map
 --- !u!1 &600301622
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,13 +886,21 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749544723}
+<<<<<<< HEAD
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+=======
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+>>>>>>> Map
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 783585815}
+<<<<<<< HEAD
   m_Father: {fileID: 1399864444}
+=======
+  m_Father: {fileID: 1786777318}
+>>>>>>> Map
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -930,6 +950,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 749544726}
   m_OnClick:
     m_PersistentCalls:
+<<<<<<< HEAD
       m_Calls:
       - m_Target: {fileID: 217548674}
         m_TargetAssemblyTypeName: Main, Assembly-CSharp
@@ -943,6 +964,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+=======
+      m_Calls: []
+>>>>>>> Map
 --- !u!114 &749544726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,6 +1005,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749544723}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &751352505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,6 +1082,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751352505}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Map
 --- !u!1 &783585814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1220,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783585814}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &793511365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,6 +1430,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846306805}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Map
 --- !u!1 &919925578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,13 +1458,21 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919925578}
+<<<<<<< HEAD
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+=======
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+>>>>>>> Map
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1974270958}
+<<<<<<< HEAD
   m_Father: {fileID: 1399864444}
+=======
+  m_Father: {fileID: 1786777318}
+>>>>>>> Map
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1484,6 +1522,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 919925581}
   m_OnClick:
     m_PersistentCalls:
+<<<<<<< HEAD
       m_Calls:
       - m_Target: {fileID: 217548674}
         m_TargetAssemblyTypeName: Main, Assembly-CSharp
@@ -1497,6 +1536,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+=======
+      m_Calls: []
+>>>>>>> Map
 --- !u!114 &919925581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1535,6 +1577,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919925578}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &1019731859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,6 +1826,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444869279}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Map
 --- !u!1 &1542310347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,6 +1896,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1708207126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,6 +1973,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708207126}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Map
 --- !u!1 &1749550751
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,8 +2209,14 @@ RectTransform:
   - {fileID: 489065817}
   - {fileID: 1870974891}
   - {fileID: 600301623}
+<<<<<<< HEAD
   - {fileID: 164745101}
   - {fileID: 1399864444}
+=======
+  - {fileID: 749544724}
+  - {fileID: 1809457468}
+  - {fileID: 919925579}
+>>>>>>> Map
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2196,13 +2250,21 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809457467}
+<<<<<<< HEAD
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+=======
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+>>>>>>> Map
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1749550752}
+<<<<<<< HEAD
   m_Father: {fileID: 1399864444}
+=======
+  m_Father: {fileID: 1786777318}
+>>>>>>> Map
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2252,6 +2314,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1809457470}
   m_OnClick:
     m_PersistentCalls:
+<<<<<<< HEAD
       m_Calls:
       - m_Target: {fileID: 164745100}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -2277,6 +2340,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+=======
+      m_Calls: []
+>>>>>>> Map
 --- !u!114 &1809457470
 MonoBehaviour:
   m_ObjectHideFlags: 0
