@@ -7,7 +7,12 @@ public class Main : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("ChooseMode");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
 }
