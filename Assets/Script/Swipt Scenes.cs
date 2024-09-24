@@ -18,4 +18,9 @@ public class Main : MonoBehaviour
     SceneManager.LoadScene("MainMenu");
 }
 
+    public void EasyMode()
+    {
+        SceneManager.LoadScene("GameScenes");
+    }
+
 }
