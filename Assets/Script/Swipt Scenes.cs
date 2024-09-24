@@ -20,7 +20,13 @@ public class Main : MonoBehaviour
 
     public void EasyMode()
     {
-        SceneManager.LoadScene("GameScenes");
+        SceneManager.LoadScene("EasyScenes");
     }
+
+    public void HardMode()
+    {
+        SceneManager.LoadScene("HardScenes");
+    }
+
 
 }
