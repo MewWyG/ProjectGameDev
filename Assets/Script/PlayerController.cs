@@ -8,7 +8,16 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public Camera cam;
     private Vector3 targetPosition;
-    private bool isMoving = false;
+    private bool isMove = false;
+
+    // Reference to the Animator component
+    private Animator animator;
+
+    void Start()
+    {
+        // Get the Animator component
+        animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -23,7 +32,8 @@ public class PlayerController : MonoBehaviour
             if (groundPlane.Raycast(ray, out rayDistance))
             {
                 targetPosition = ray.GetPoint(rayDistance); // กำหนดตำแหน่งเป้าหมาย
-                isMoving = true; // เปลี่ยนสถานะเป็นกำลังเคลื่อนที่
+                isMove = true; // เปลี่ยนสถานะเป็นกำลังเคลื่อนที่
+                animator.SetBool("isMoving", true); // ตั้งค่า isMoving เป็น true เพื่อเริ่มอนิเมชันการวิ่ง
             }
         }
 
@@ -50,14 +60,15 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // หากกำลังเคลื่อนที่ ให้คำนวณการเคลื่อนที่
-        if (isMoving)
+        if (isMove)
         {
             Vector3 direction = (targetPosition - rb.position).normalized; // หาทิศทางไปยังตำแหน่งเป้าหมาย
 
             // หากใกล้ถึงตำแหน่งเป้าหมาย ให้หยุดการเคลื่อนที่
             if (Vector3.Distance(rb.position, targetPosition) < 0.1f)
             {
-                isMoving = false; // เปลี่ยนสถานะเป็นไม่เคลื่อนที่
+                isMove = false; // เปลี่ยนสถานะเป็นไม่เคลื่อนที่
+                animator.SetBool("isMoving", false); // ตั้งค่า isMoving เป็น false เพื่อเปลี่ยนกลับไปที่ท่า Idle
             }
             else
             {
