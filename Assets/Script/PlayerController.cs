@@ -5,18 +5,33 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    private bool isMove = false;
+    public bool isAttack = false; // เก็บสถานะการโจมตี
     public Rigidbody rb;
     public Camera cam;
     private Vector3 targetPosition;
-    private bool isMove = false;
+    public static PlayerController instance;
 
     // Reference to the Animator component
     private Animator animator;
 
+    void Awake()
+    {
+        // กำหนดให้ instance เป็นตัวนี้
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         // Get the Animator component
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); 
     }
 
     void Update()
@@ -55,6 +70,13 @@ public class PlayerController : MonoBehaviour
                 rb.MoveRotation(rotation);
             }
         }
+
+        // ตั้งค่าการโจมตีให้เป็น true ตลอดเวลา
+        isAttack = true; // ทำให้การโจมตีเป็นจริงในทุกเฟรม
+        animator.SetTrigger("isAttacking"); // เรียกใช้การโจมตีในทุกเฟรม
+
+        // อาจต้องการให้การโจมตีหยุดหลังจากที่โจมตีเสร็จ
+        // คุณอาจต้องใช้ Animation Event หรือ Timer เพื่อจัดการเรื่องนี้ในอนาคต
     }
 
     void FixedUpdate()
