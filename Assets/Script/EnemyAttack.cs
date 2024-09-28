@@ -26,6 +26,14 @@ public class EnemyAttack : MonoBehaviour
         {
             AttackPlayer();
         }
+        else
+        {
+            // ถ้าผู้เล่นอยู่นอกระยะการโจมตี ให้หยุดการโจมตี
+            if (animator != null)
+            {
+                animator.SetBool("isAttacking", false);
+            }
+        }
     }
 
     // ฟังก์ชันโจมตีผู้เล่น
@@ -34,10 +42,10 @@ public class EnemyAttack : MonoBehaviour
         // เริ่มโจมตี และปิดการโจมตีชั่วคราวในขณะที่ cooldown กำลังทำงาน
         canAttack = false;
 
-        // เล่นแอนิเมชันการโจมตี
+        // เล่นแอนิเมชันการโจมตีด้วยการใช้ bool
         if (animator != null)
         {
-            animator.SetTrigger("Attack");
+            animator.SetBool("isAttacking", true);
         }
 
         // เรียกใช้การสร้างความเสียหายหลังจากแอนิเมชันโจมตี
@@ -65,6 +73,11 @@ public class EnemyAttack : MonoBehaviour
     void ResetAttack()
     {
         canAttack = true;
+        // ปิดแอนิเมชันการโจมตีหลังจาก cooldown เสร็จสิ้น
+        if (animator != null)
+        {
+            animator.SetBool("isAttacking", false);
+        }
     }
 
     // ฟังก์ชันแสดงระยะการโจมตีใน editor
