@@ -4,7 +4,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public Transform player;           // ตัวแปรเก็บตำแหน่งของ player
     public float attackRange = 2f;     // ระยะการโจมตีของศัตรู
-    public float attackCooldown = 2f;  // เวลาระหว่างการโจมตีแต่ละครั้ง
+    public float attackCooldown = 1f;  // เวลาระหว่างการโจมตีแต่ละครั้ง
     public int attackDamage = 10;      // ความเสียหายจากการโจมตี
 
     private bool canAttack = true;     // ใช้ตรวจสอบว่าศัตรูสามารถโจมตีได้หรือไม่
@@ -26,14 +26,6 @@ public class EnemyAttack : MonoBehaviour
         {
             AttackPlayer();
         }
-        else
-        {
-            // ถ้าผู้เล่นอยู่นอกระยะการโจมตี ให้หยุดการโจมตี
-            if (animator != null)
-            {
-                animator.SetBool("isAttacking", false);
-            }
-        }
     }
 
     // ฟังก์ชันโจมตีผู้เล่น
@@ -42,10 +34,10 @@ public class EnemyAttack : MonoBehaviour
         // เริ่มโจมตี และปิดการโจมตีชั่วคราวในขณะที่ cooldown กำลังทำงาน
         canAttack = false;
 
-        // เล่นแอนิเมชันการโจมตีด้วยการใช้ bool
+        // เล่นแอนิเมชันการโจมตี
         if (animator != null)
         {
-            animator.SetBool("isAttacking", true);
+            animator.SetTrigger("Attack");
         }
 
         // เรียกใช้การสร้างความเสียหายหลังจากแอนิเมชันโจมตี
@@ -65,6 +57,11 @@ public class EnemyAttack : MonoBehaviour
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(attackDamage);
+                Debug.Log("Damage dealt: " + attackDamage);
+            }
+            else
+            {
+                Debug.LogError("PlayerHealth component not found on the player!");
             }
         }
     }
@@ -73,11 +70,6 @@ public class EnemyAttack : MonoBehaviour
     void ResetAttack()
     {
         canAttack = true;
-        // ปิดแอนิเมชันการโจมตีหลังจาก cooldown เสร็จสิ้น
-        if (animator != null)
-        {
-            animator.SetBool("isAttacking", false);
-        }
     }
 
     // ฟังก์ชันแสดงระยะการโจมตีใน editor

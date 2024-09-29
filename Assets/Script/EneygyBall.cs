@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class EnergyBall : MonoBehaviour
 {
-    public float speed = 3f;  // ความเร็วของลูกพลังงาน
+    public float speed = 3f;          // ความเร็วของลูกพลังงาน
+    public int damage = 20;           // ความเสียหายที่ลูกพลังงานจะทำต่อผู้เล่น
     
     private Rigidbody rb;
 
@@ -18,12 +19,25 @@ public class EnergyBall : MonoBehaviour
     // ฟังก์ชันตรวจจับการชนกับ Collider
     void OnCollisionEnter(Collision collision)
     {
-        // ตรวจสอบว่า tag ของวัตถุที่ชนคือ "Player" หรือ "Object"
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Object"))
+        // ตรวจสอบว่าชนกับวัตถุที่มี tag "Player"
+        if (collision.gameObject.CompareTag("Player"))
         {
-            // ทำลายลูกพลังงานเมื่อชนกับวัตถุที่ตรงกับ tag ที่กำหนด
+            // ดึง PlayerHealth ของผู้เล่น
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+
+            // ถ้ามี component PlayerHealth ให้ทำการสร้างความเสียหาย
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);  // ทำดาเมจต่อผู้เล่น
+            }
+
+            // ทำลายลูกพลังงานเมื่อชนกับผู้เล่น
             Destroy(gameObject);
         }
-        // ถ้าไม่ใช่ "Player" หรือ "Object" จะปล่อยให้ทะลุไปโดยไม่ทำอะไร
+        else
+        {
+            // ทำลายลูกพลังงานเมื่อชนกับวัตถุอื่นๆ เช่นกำแพงหรือสิ่งกีดขวาง
+            Destroy(gameObject);
+        }
     }
 }
