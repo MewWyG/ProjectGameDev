@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private bool isMove = false;
-    public bool isAttack = false; // เก็บสถานะการโจมตี
+    private bool isAttack = false; // เก็บสถานะการโจมตี
     public Rigidbody rb;
     public Camera cam;
     private Vector3 targetPosition;
@@ -14,6 +14,12 @@ public class PlayerController : MonoBehaviour
 
     // Reference to the Animator component
     private Animator animator;
+
+    // อ้างอิงไปยังอาวุธ
+    public Weapon equippedWeapon;
+
+    // ระยะเวลาระหว่างการโจมตี
+    public float attackInterval = 1f; // 1 วินาที
 
     void Awake()
     {
@@ -32,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         // Get the Animator component
         animator = GetComponent<Animator>(); 
+        StartCoroutine(AttackRoutine()); // เริ่ม Coroutine สำหรับการโจมตีอัตโนมัติ
     }
 
     void Update()
@@ -70,13 +77,6 @@ public class PlayerController : MonoBehaviour
                 rb.MoveRotation(rotation);
             }
         }
-
-        // ตั้งค่าการโจมตีให้เป็น true ตลอดเวลา
-        isAttack = true; // ทำให้การโจมตีเป็นจริงในทุกเฟรม
-        animator.SetTrigger("isAttacking"); // เรียกใช้การโจมตีในทุกเฟรม
-
-        // อาจต้องการให้การโจมตีหยุดหลังจากที่โจมตีเสร็จ
-        // คุณอาจต้องใช้ Animation Event หรือ Timer เพื่อจัดการเรื่องนี้ในอนาคต
     }
 
     void FixedUpdate()
@@ -98,5 +98,31 @@ public class PlayerController : MonoBehaviour
                 rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             }
         }
+    }
+
+    private IEnumerator AttackRoutine()
+    {
+        while (true)
+        {
+            if (equippedWeapon != null)
+            {
+                equippedWeapon.Attack(); // เรียกใช้ฟังก์ชันการโจมตี
+                animator.SetTrigger("isAttacking"); // เรียกใช้การโจมตีในอนิเมชัน
+            }
+
+            yield return new WaitForSeconds(attackInterval); // รอระยะเวลาที่กำหนด
+        }
+    }
+
+    // ฟังก์ชันสำหรับการใช้สกิล (สามารถแยกต่างหากได้เหมือนเดิม)
+    private void UseSkill()
+    {
+        StartCoroutine(PlaySkillAnimation());
+    }
+
+    private IEnumerator PlaySkillAnimation()
+    {
+        animator.SetTrigger("isUseSkill");
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
     }
 }
