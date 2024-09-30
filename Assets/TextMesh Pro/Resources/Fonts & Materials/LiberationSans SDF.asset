@@ -37,7 +37,11 @@ Material:
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
     - _OutlineSoftness: 0
+<<<<<<< HEAD
     - _OutlineWidth: 0.3
+=======
+    - _OutlineWidth: 0.298
+>>>>>>> Map
     - _PerspectiveFilter: 0.875
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1
