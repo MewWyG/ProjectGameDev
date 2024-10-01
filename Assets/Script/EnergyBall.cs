@@ -20,7 +20,7 @@ public class EnergyBall : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // ตรวจสอบว่าชนกับวัตถุที่มี tag "Player"
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("player"))
         {
             // ดึง PlayerHealth ของผู้เล่น
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
