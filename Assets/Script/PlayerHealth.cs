@@ -39,4 +39,8 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Player has died!");
         // Add logic for player death (e.g., game over, respawn, etc.)
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Map

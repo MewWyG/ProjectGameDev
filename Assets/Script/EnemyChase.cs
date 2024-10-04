@@ -1,12 +1,16 @@
 using UnityEngine;
+<<<<<<< HEAD
 using System.Collections;
 
+=======
+>>>>>>> Map
 
 public class EnemyChase : MonoBehaviour
 {
     public Transform player;          // ตัวแปรเก็บตำแหน่งของ player
     public float detectionRange = 100f; // ระยะตรวจจับผู้เล่น
     public float speed = 5f;          // ความเร็วของศัตรู
+<<<<<<< HEAD
     public float rotationSpeed = 5f;  // ความเร็วในการหมุนของศัตรู
     public float chaseDelay = 5f;     // ระยะเวลาหน่วงก่อนจะไล่ผู้เล่น
 
@@ -14,6 +18,12 @@ public class EnemyChase : MonoBehaviour
     private bool isMoving = false;
     private bool isChasing = false;   // ตัวแปรตรวจสอบว่าเริ่มไล่ตามหรือยัง
     private bool playerDetected = false; // ตรวจจับผู้เล่น
+=======
+    public float rotationSpeed = 5f;   // ความเร็วในการหมุนของศัตรู
+
+    private Animator animator;
+    private bool isMoving = false;
+>>>>>>> Map
 
     void Start()
     {
@@ -26,6 +36,7 @@ public class EnemyChase : MonoBehaviour
         // คำนวณระยะห่างระหว่างศัตรูกับผู้เล่น
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
+<<<<<<< HEAD
         // ถ้าผู้เล่นอยู่ในระยะตรวจจับและยังไม่เริ่มไล่ตาม
         if (distanceToPlayer <= detectionRange && !playerDetected)
         {
@@ -39,6 +50,14 @@ public class EnemyChase : MonoBehaviour
             isMoving = true;
 
             // คำนวณทิศทางที่ต้องการให้ศัตรูหมุนไปทางผู้เล่น
+=======
+        // ถ้าผู้เล่นอยู่ในระยะตรวจจับ
+        if (distanceToPlayer <= detectionRange)
+        {
+            isMoving = true;
+
+            // คำนวณทิศทางที่ต้องการให้ศัตรุหมุนไปทางผู้เล่น
+>>>>>>> Map
             Vector3 direction = (player.position - transform.position).normalized;
 
             // หมุนศัตรูให้หันหน้าหาผู้เล่น
@@ -57,6 +76,7 @@ public class EnemyChase : MonoBehaviour
         animator.SetBool("isMoving", isMoving); 
     }
 
+<<<<<<< HEAD
     // Coroutine สำหรับหน่วงเวลาหลังจากตรวจจับผู้เล่น
     IEnumerator ChasePlayerAfterDelay()
     {
@@ -65,10 +85,16 @@ public class EnemyChase : MonoBehaviour
         isChasing = true;
     }
 
+=======
+>>>>>>> Map
     // ฟังก์ชันสำหรับแสดงระยะตรวจจับใน editor
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Map

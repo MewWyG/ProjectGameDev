@@ -17,4 +17,8 @@ public class HealthBar : MonoBehaviour
         healthSlider.maxValue = amount; // Set the maximum value for the slider
         SetSlider(amount); // Set the current value to max value
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Map

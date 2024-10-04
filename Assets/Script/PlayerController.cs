@@ -2,35 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Map
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Rigidbody rb;
+<<<<<<< HEAD
     private bool isAttack = false;
     public Camera cam;
     private Vector3 targetPosition;
     private bool isMove = false;
     public static PlayerController instance;
+=======
+    public Camera cam;
+    private Vector3 targetPosition;
+    private bool isMove = false;
+>>>>>>> Map
 
     // Reference to the Animator component
     private Animator animator;
 
+<<<<<<< HEAD
     // Reference to WeaponPlayer component
     private WaeponPlayer weapon;
 
+=======
+>>>>>>> Map
     void Start()
     {
         // Get the Animator component
         animator = GetComponent<Animator>();
+<<<<<<< HEAD
 
         // Find the WeaponPlayer component attached to the player's weapon
         weapon = GetComponentInChildren<WaeponPlayer>();
+=======
+>>>>>>> Map
     }
 
     void Update()
     {
+<<<<<<< HEAD
         // ตรวจสอบการคลิกขวาเพื่อเดิน
         if (Input.GetMouseButtonDown(1)) // 1 คือ คลิกขวาเดิน
+=======
+        // ตรวจสอบการคลิกขวา
+        if (Input.GetMouseButtonDown(1)) // 1 คือ คลิกขวา
+>>>>>>> Map
         {
             // หาตำแหน่งที่เมาส์คลิกในโลก 3D
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -63,11 +84,14 @@ public class PlayerController : MonoBehaviour
                 rb.MoveRotation(rotation);
             }
         }
+<<<<<<< HEAD
 
         if(Input.GetMouseButtonDown(0)) // 0 คือ คลิกซ้ายโจมตี
         {
             Attack();
         }
+=======
+>>>>>>> Map
     }
 
     void FixedUpdate()
@@ -90,6 +114,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+<<<<<<< HEAD
 
     private void Attack()
     {
@@ -116,4 +141,6 @@ public class PlayerController : MonoBehaviour
         isAttack = false; // รีเซ็ตสถานะการโจมตีเป็น false
         animator.SetBool("isAttack", false); // ตั้งค่าอนิเมชันการโจมตีเป็น false เพื่อหยุดอนิเมชัน
     }
+=======
+>>>>>>> Map
 }
