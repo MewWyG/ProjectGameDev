@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     private PlayerController playerController; // Reference to the PlayerController script
     private Rigidbody rb;               // Reference to Rigidbody (if applicable)
 
+    public GameManager gameManager; // Reference to the GameManager script
     void Start()
     {
         currentHealth = maxHealth;     // Initialize current health
@@ -59,28 +60,35 @@ public class PlayerHealth : MonoBehaviour
     }
 
     private void Die()
+{
+    if (isDead) return; // Prevent multiple death triggers
+
+    isDead = true; // Set player status as dead
+    animator.SetBool("isDead", true); // Trigger death animation
+    Debug.Log("Player has died!");
+
+    // Disable the PlayerController script to stop movement
+    if (playerController != null)
     {
-        if (isDead) return; // Prevent multiple death triggers
-
-        isDead = true; // Set player status as dead
-        animator.SetBool("isDead", true); // Trigger death animation
-        Debug.Log("Player has died!");
-
-        // Disable the PlayerController script to stop movement
-        if (playerController != null)
-        {
-            playerController.enabled = false; // Disable movement
-        }
-
-        // Optionally disable the Rigidbody to stop any further physics-based movement
-        if (rb != null)
-        {
-            rb.velocity = Vector3.zero; // Stop any ongoing movement
-            rb.isKinematic = true;      // Make Rigidbody kinematic (no physics interactions)
-        }
-
-        // Disable any other scripts or logic related to player actions if necessary
+        playerController.enabled = false; // Disable movement
     }
+
+    // Optionally disable the Rigidbody to stop any further physics-based movement
+    if (rb != null)
+    {
+        rb.velocity = Vector3.zero; // Stop any ongoing movement
+        rb.isKinematic = true;      // Make Rigidbody kinematic (no physics interactions)
+    }
+
+    // Call Game Over from the GameManager
+    if (gameManager != null)
+    {
+        gameManager.GameOver(); // Call the Game Over function
+    }
+
+    // Disable any other scripts or logic related to player actions if necessary
+}
+
 
     private IEnumerator ResetHitAnimation()
     {
