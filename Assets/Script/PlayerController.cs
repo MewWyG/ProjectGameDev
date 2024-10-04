@@ -2,28 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Rigidbody rb;
+    private bool isAttack = false;
     public Camera cam;
     private Vector3 targetPosition;
     private bool isMove = false;
+    public static PlayerController instance;
 
     // Reference to the Animator component
     private Animator animator;
+
+    // Reference to WeaponPlayer component
+    private WaeponPlayer weapon;
 
     void Start()
     {
         // Get the Animator component
         animator = GetComponent<Animator>();
+
+        // Find the WeaponPlayer component attached to the player's weapon
+        weapon = GetComponentInChildren<WaeponPlayer>();
     }
 
     void Update()
     {
-        // ตรวจสอบการคลิกขวา
-        if (Input.GetMouseButtonDown(1)) // 1 คือ คลิกขวา
+        // ตรวจสอบการคลิกขวาเพื่อเดิน
+        if (Input.GetMouseButtonDown(1)) // 1 คือ คลิกขวาเดิน
         {
             // หาตำแหน่งที่เมาส์คลิกในโลก 3D
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -56,6 +63,11 @@ public class PlayerController : MonoBehaviour
                 rb.MoveRotation(rotation);
             }
         }
+
+        if(Input.GetMouseButtonDown(0)) // 0 คือ คลิกซ้ายโจมตี
+        {
+            Attack();
+        }
     }
 
     void FixedUpdate()
@@ -77,5 +89,31 @@ public class PlayerController : MonoBehaviour
                 rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             }
         }
+    }
+
+    private void Attack()
+    {
+        if (!isAttack)
+        {
+            isAttack = true; // เปลี่ยนสถานะการโจมตีเป็น true
+            animator.SetBool("isAttack", true); // เรียกใช้อนิเมชันการโจมตี
+
+            // เรียกใช้การโจมตีของอาวุธ
+            if (weapon != null)
+            {
+                weapon.Attack();
+            }
+
+            StartCoroutine(ResetAttack());
+        }
+    }
+
+    private IEnumerator ResetAttack()
+    {
+        // รอเวลาตามความยาวของอนิเมชันการโจมตี (เช่น 0.5 วินาที)
+        yield return new WaitForSeconds(0.5f);
+
+        isAttack = false; // รีเซ็ตสถานะการโจมตีเป็น false
+        animator.SetBool("isAttack", false); // ตั้งค่าอนิเมชันการโจมตีเป็น false เพื่อหยุดอนิเมชัน
     }
 }
