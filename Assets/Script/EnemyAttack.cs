@@ -9,7 +9,6 @@ public class EnemyAttack : MonoBehaviour
 
     private bool canAttack = true;     // ใช้ตรวจสอบว่าศัตรูสามารถโจมตีได้หรือไม่
     private Animator animator;         // อ้างอิงถึง Animator เพื่อใช้แอนิเมชันโจมตี
-    private bool isAttacking = false;  // สถานะการโจมตี
 
     void Start()
     {
@@ -23,28 +22,40 @@ public class EnemyAttack : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // ตรวจสอบว่าผู้เล่นอยู่ในระยะการโจมตี
-        if (distanceToPlayer <= attackRange && canAttack && !isAttacking)
+        if (distanceToPlayer <= attackRange && canAttack)
         {
             AttackPlayer();
         }
-
-        // อัปเดตแอนิเมชัน based on isAttacking state
-        animator.SetBool("isAttacking", isAttacking);
     }
 
     // ฟังก์ชันโจมตีผู้เล่น
     void AttackPlayer()
-    {
-        // เริ่มโจมตี และปิดการโจมตีชั่วคราวในขณะที่ cooldown กำลังทำงาน
-        canAttack = false;
-        isAttacking = true;  // เปิดสถานะการโจมตี
+        {
+            // Disable further attacks during cooldown
+            canAttack = false;
 
-        // เรียกใช้การสร้างความเสียหายหลังจากแอนิเมชันโจมตี
-        Invoke(nameof(DealDamage), 0.5f);  // Delay damage to match the attack animation timing
+            // Play attack animation
+            if (animator != null)
+            {
+                animator.SetBool("Attack", true); // Set the animation to start
 
-        // เริ่ม cooldown หลังจากโจมตี
-        Invoke(nameof(ResetAttack), attackCooldown);
-    }
+                // Optionally reset the animation after a delay, e.g., matching the cooldown
+                Invoke(nameof(ResetAttackAnimation), 0.5f);  // Adjust delay to fit your animation timing
+            }
+
+            // Deal damage after a short delay
+            Invoke(nameof(DealDamage), 0.5f);
+
+            // Start cooldown after the attack
+            Invoke(nameof(ResetAttack), attackCooldown);
+        }
+
+        // Function to reset the attack animation
+        void ResetAttackAnimation()
+        {
+            animator.SetBool("Attack", false); // Reset the attack animation
+        }
+
 
     // ฟังก์ชันสร้างความเสียหายให้ผู้เล่น
     void DealDamage()
@@ -69,7 +80,6 @@ public class EnemyAttack : MonoBehaviour
     void ResetAttack()
     {
         canAttack = true;
-        isAttacking = false;  // ปิดสถานะการโจมตีหลังจาก cooldown เสร็จสิ้น
     }
 
     // ฟังก์ชันแสดงระยะการโจมตีใน editor

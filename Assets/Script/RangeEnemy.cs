@@ -80,40 +80,32 @@ public class RangeEnemy : MonoBehaviour
 
     // Coroutine สำหรับร่ายเวทโจมตีผู้เล่น
     IEnumerator CastSpell()
-{
-    isCastingSpell = true;
-
-    // เล่นแอนิเมชันร่ายเวท (สมมติว่า parameter ใน Animator ชื่อว่า "isCasting")
-    if (animator != null)
     {
-        animator.SetBool("isCasting", true);
+        isCastingSpell = true;
+
+        // เล่นแอนิเมชันร่ายเวท (สมมติว่า parameter ใน Animator ชื่อว่า "isCasting")
+        if (animator != null)
+        {
+            animator.SetBool("isCasting", true);
+        }
+
+        // รอเวลาที่เหมาะสมก่อนจะโจมตี (เช่น 1 วินาที เพื่อให้ตรงกับแอนิเมชัน)
+        yield return new WaitForSeconds(1f);
+
+        // โจมตีผู้เล่น (เช่น การยิงโปรเจกไทล์ หรือสร้างความเสียหาย)
+        DealMagicDamage();
+
+        // ปิดการร่ายเวทหลังจากโจมตีเสร็จ
+        if (animator != null)
+        {
+            animator.SetBool("isCasting", false);
+        }
+
+        // รอคูลดาวน์ก่อนจะร่ายเวทอีกครั้ง
+        yield return new WaitForSeconds(spellCastCooldown);
+
+        isCastingSpell = false;
     }
-
-    // หันศัตรูไปทางผู้เล่นขณะกำลังร่ายเวท
-    if (player != null)
-    {
-        Vector3 direction = (player.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-    }
-
-    // รอเวลาที่เหมาะสมก่อนจะโจมตี (เช่น 1 วินาที เพื่อให้ตรงกับแอนิเมชัน)
-    yield return new WaitForSeconds(1f);
-
-    // โจมตีผู้เล่น (เช่น การยิงโปรเจกไทล์ หรือสร้างความเสียหาย)
-    DealMagicDamage();
-
-    // ปิดการร่ายเวทหลังจากโจมตีเสร็จ
-    if (animator != null)
-    {
-        animator.SetBool("isCasting", false);
-    }
-
-    // รอคูลดาวน์ก่อนจะร่ายเวทอีกครั้ง
-    yield return new WaitForSeconds(spellCastCooldown);
-
-    isCastingSpell = false;
-}
 
     // ฟังก์ชันโจมตีผู้เล่นด้วยเวทมนตร์ (อาจเป็นการสร้างโปรเจกไทล์)
     void DealMagicDamage()

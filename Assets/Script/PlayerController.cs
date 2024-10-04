@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         if (!isAttack)
         {
             isAttack = true; // เปลี่ยนสถานะการโจมตีเป็น true
-            animator.SetBool("isAttack", true); // เรียกใช้อนิเมชันการโจมตี
+            animator.SetBool("Attack", true); // เรียกใช้อนิเมชันการโจมตี
 
             // เรียกใช้การโจมตีของอาวุธ
             if (weapon != null)
@@ -114,6 +114,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         isAttack = false; // รีเซ็ตสถานะการโจมตีเป็น false
-        animator.SetBool("isAttack", false); // ตั้งค่าอนิเมชันการโจมตีเป็น false เพื่อหยุดอนิเมชัน
+        animator.SetBool("Attack", false); // ตั้งค่าอนิเมชันการโจมตีเป็น false เพื่อหยุดอนิเมชัน
     }
 }
