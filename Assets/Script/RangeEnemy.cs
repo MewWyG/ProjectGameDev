@@ -1,17 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI; // เพิ่มการใช้ NavMesh
 
 public class RangeEnemy : MonoBehaviour
 {
     public Transform player;          // ตัวแปรเก็บตำแหน่งของ player
     public float detectionRange = 100f; // ระยะตรวจจับผู้เล่น
     public float stoppingDistance = 5f; // ระยะที่ศัตรูจะหยุดเดินเมื่อเข้าใกล้ผู้เล่น
-    public float speed = 5f;          // ความเร็วของศัตรู
-    public float rotationSpeed = 5f;  // ความเร็วในการหมุนของศัตรู
     public float chaseDelay = 5f;     // ระยะเวลาหน่วงก่อนจะไล่ผู้เล่น
     public float spellCastCooldown = 3f; // ระยะเวลาคูลดาวน์ระหว่างการร่ายเวท
 
     private Animator animator;
+    private NavMeshAgent agent; // ตัวแปร NavMeshAgent
     private bool isMoving = false;
     private bool isChasing = false;   // ตัวแปรตรวจสอบว่าเริ่มไล่ตามหรือยัง
     private bool playerDetected = false; // ตรวจจับผู้เล่น
@@ -21,6 +21,8 @@ public class RangeEnemy : MonoBehaviour
     {
         // ดึง Component Animator มาเก็บไว้ในตัวแปร animator
         animator = GetComponent<Animator>(); 
+        // ดึง Component NavMeshAgent มาเก็บไว้ในตัวแปร agent
+        agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -38,25 +40,18 @@ public class RangeEnemy : MonoBehaviour
         // ถ้าเริ่มไล่ตามแล้ว
         if (isChasing && !isCastingSpell)
         {
+            // ถ้าผู้เล่นอยู่ไกลเกินไป, ให้เดินไปหาผู้เล่น
             if (distanceToPlayer > stoppingDistance)
             {
                 isMoving = true;
-
-                // คำนวณทิศทางที่ต้องการให้ศัตรูหมุนไปทางผู้เล่น
-                Vector3 direction = (player.position - transform.position).normalized;
-
-                // หมุนศัตรูให้หันหน้าหาผู้เล่น
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-
-                // เคลื่อนที่เข้าหาผู้เล่น
-                transform.position += direction * speed * Time.deltaTime;
+                agent.SetDestination(player.position); // ใช้ NavMeshAgent ตั้งเป้าหมายไปที่ผู้เล่น
             }
             else
             {
                 // หยุดเคลื่อนที่เมื่อเข้าใกล้ผู้เล่นในระยะที่กำหนด
                 isMoving = false;
-
+                agent.ResetPath(); // เคลียร์เส้นทางของ NavMeshAgent
+                
                 // เริ่มการร่ายเวทโจมตี
                 StartCoroutine(CastSpell());
             }
@@ -64,6 +59,7 @@ public class RangeEnemy : MonoBehaviour
         else
         {
             isMoving = false;
+            agent.ResetPath(); // เคลียร์เส้นทางของ NavMeshAgent ถ้าไม่ไล่ตาม
         }
 
         // อัพเดต Animator parameter "isMoving"
