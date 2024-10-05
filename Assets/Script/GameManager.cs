@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement; // For restarting the scene or loading other 
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI; // Reference to the Game Over UI
+    private int enemyCount;       // Track how many enemies are still alive
 
     // Method to trigger Game Over
     public void GameOver()
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!");
     }
 
-    // Option to restart the game (reset the scene)
+    // Method to restart the game (reset the scene)
     public void RestartGame()
     {
         // Reset the time scale in case the game was paused during Game Over
@@ -31,16 +32,32 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    // Method to load the mode selection scene
     public void Mode()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("ChooseMode");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f; // Ensure the game is unpaused
+        SceneManager.LoadScene("ChooseMode"); // Load the ChooseMode scene
+    }
+
+    // Method to choose game mode and load appropriate scene
+    public void ChooseGameMode(string mode)
+    {
+        if (mode == "Easy")
+        {
+            PlayerPrefs.SetString("GameMode", "Easy");
+            SceneManager.LoadScene("EasyScenes"); // Load Easy scene
+        }
+        else if (mode == "Hard")
+        {
+            PlayerPrefs.SetString("GameMode", "Hard");
+            SceneManager.LoadScene("HardScenes"); // Load Hard scene
+        }
     }
 
     // Option to quit the game
     public void QuitGame()
     {
+        Time.timeScale = 1f;
         Debug.Log("Quitting Game...");
         SceneManager.LoadScene("MainMenu");
     }
